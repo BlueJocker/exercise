@@ -1,0 +1,37 @@
+// 使用原生http模块 来实现一个hello world 的接口
+
+/** require是引入文件*/
+/** require是 AMD规范引入方式*/
+/**require是运行时调用，所以require理论上可以运用在代码的任何地方；而import是编译时调用，所以必须放在文件开头*/
+// 引入node核心模块
+let http = require('http');
+
+/**创建一个HTTP服务器，为服务器添加客户端请求事件*/
+let server = http.createServer((req/*请求对象*/, res/*响应对象*/) => {
+    // 客户端请求路径
+    console.log(`客户端请求路径为：${req.url}`)
+    // 响应状态码
+      res.writeHead(200);
+    // 响应给客户端
+    switch(req.url){
+        case '/': {//浏览器默认行为
+            res.write('默认接口')
+            break;
+        }
+        case '/index': { //首页
+            res.write('首页接口')
+            break;
+        }
+
+        case '/loging': {//登录页
+            res.write('登录接口')
+            break;
+        }
+
+    }
+    res.end();
+});
+/**监听3000端口*/
+server.listen(3000, () => {
+    console.log('listenning on 3000');
+});
